@@ -10,19 +10,19 @@ from JobOpen.serializers import JobOpenSerializer
 
 
 
-class JobListView(generics.ListCreateAPIView):
+# class JobListView(generics.ListCreateAPIView):
+#
+#     serializer_class = JobOpenSerializer
+#
+#     def get_queryset(self):
+#         queryset = JobOpen.objects.all()
+#         company = self.request.query_params.get('company')
+#         if company is not None:
+#             queryset = queryset.filter(purchaser__company=company)
+#         return queryset
 
-    serializer_class = JobOpenSerializer
 
-    def get_queryset(self):
-        queryset = JobOpen.objects.all()
-        company = self.request.query_params.get('company')
-        if company is not None:
-            queryset = queryset.filter(purchaser__company=company)
-        return queryset
-
-
-# ---------------검색기능------------------
+# ---------------검색기능을 추가한 view ------------------
 class JobSearch(generics.ListAPIView):
     queryset = JobOpen.objects.all()
     serializer_class = JobOpenSerializer
