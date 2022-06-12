@@ -23,9 +23,14 @@ from JobOpen.serializers import JobOpenSerializer
 
 
 # ---------------검색기능을 추가한 view ------------------
+# https://www.django-rest-framework.org/api-guide/filtering/#searchfilter
 class JobSearch(generics.ListAPIView):
     queryset = JobOpen.objects.all()
     serializer_class = JobOpenSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['company','country','region','position','skills']
 
+class JobDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = JobOpen.objects.all()
+    serializer_class = JobOpenSerializer
+    lookup_field = "id"
