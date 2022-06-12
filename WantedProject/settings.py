@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 
     # app
     'JobPost',
+    'JobOpen',
 ]
 
 MIDDLEWARE = [
