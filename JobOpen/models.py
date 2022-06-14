@@ -1,9 +1,11 @@
 from django.db import models
 
 # Create your models here.
+from Company.models import Companys
+
 
 class JobOpen(models.Model):
-    company = models.CharField(max_length=500,null=False)
+    company = models.ForeignKey(Companys, on_delete=models.CASCADE, null = True, related_name="company")
     country = models.CharField(max_length=200)
     region = models.CharField(max_length=200)
     position = models.CharField(max_length=500, null=False)
