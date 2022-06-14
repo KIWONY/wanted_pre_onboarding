@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     # app
     'JobPost',
     'JobOpen',
+    'User'
 ]
 
 REST_FRAMEWORK = {
