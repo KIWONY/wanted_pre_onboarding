@@ -5,7 +5,7 @@ from Company.models import Companys
 
 
 class JobOpen(models.Model):
-    company = models.ForeignKey(Companys, on_delete=models.CASCADE, null = True, related_name="company")
+    company = models.ForeignKey('Company.Companys', on_delete=models.CASCADE, null = True, related_name="company")
     country = models.CharField(max_length=200)
     region = models.CharField(max_length=200)
     position = models.CharField(max_length=500, null=False)
