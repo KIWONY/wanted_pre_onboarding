@@ -7,3 +7,4 @@ class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Companys
         fields = ['company_name','type']
+        depth = 1

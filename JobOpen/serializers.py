@@ -1,27 +1,19 @@
-from rest_framework import serializers
 
-from Company.serializers import CompanySerializer
 from JobOpen.models import JobOpen
+
+from rest_framework import serializers
 
 
 class JobOpenSerializer(serializers.ModelSerializer):
-
-
-    # company = serializers.ReadOnlyField(source="company_name.company")
+    # source="JobOpen Field.Company field(what field you want to get)"
+    company = serializers.ReadOnlyField(source="company.company_name")
     class Meta:
         model = JobOpen
-        fields = ['id','country','region','position','skills']
-
-    # response[모델명] = ModelSerializer(instance.ForeingKeyField).data
-    def to_representation(self, instance):
-        response = super().to_representation(instance)
-        response['Companys'] = CompanySerializer(instance.company).data
-        return response
-
+        fields = ['id','company','country','region','position','skills',]
 
 
 class JobOpenDetailSerializer(serializers.ModelSerializer):
-
+    company = serializers.ReadOnlyField(source="company.company_name")
     class Meta:
         model = JobOpen
         fields = '__all__'
