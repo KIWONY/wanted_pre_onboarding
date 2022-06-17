@@ -42,8 +42,6 @@ class JobCreateView(ListCreateAPIView):
         serializer = JobCreateSerializer(queryset, many=True)
         return Response(serializer.data)
 
-    def perform_create(self, serializer):
-        serializer.save(company_name=self.request.user)
 
 
 class JobUpdateDeleteView(RetrieveUpdateDestroyAPIView):

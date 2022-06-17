@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     'django_filters',
 
     # app
-    'JobPost',
     'JobOpen',
     'User',
     'Company',
