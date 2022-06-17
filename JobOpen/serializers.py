@@ -31,3 +31,6 @@ class JobCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = JobOpen
         fields = ['company','country','region','position','compensation','description','skills']
+
+    def create(self, validated_data):
+        return JobOpen.objects.create(**validated_data)
