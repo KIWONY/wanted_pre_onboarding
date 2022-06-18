@@ -12,39 +12,59 @@
 <br/>
 
 ## 2. 구현
-  JobPost 앱에서는 채용정보들을 등록, 수정, 삭제하는 기능을 구현하였습니다.
-  ### 채용 등록,수정,삭제
   
-  * ModelViewSet을 사용하여 CRUD를 한번에 구현하였습니다.
-
-  회사는 
-  * ```GET /job_post/``` 에서 등록된 정보를 확인할 수 있고, 채용정보를 post할 수 있습니다.
-  * id를 기준으로 상세페이지에 접근할 수 있으며, 
-  * 상세페이지에서는 수정, 삭제를 할 수 있습니다. <br/>
-    ```PUT /job_post/<id>```에서 정보를 update할 수 있고,  ```Delete /job_post/<id>``` 에서 정보를 delete할 수 있습니다.<br/>
-  * 응답 <br/>
-    성공했을 시 HTTP 200 OK 으로 응답하며, 실패했을 시 HTTP 404 Not Found으로 응답합니다.
-    
-```
-[
+  ### 채용 등록
+  
+  * JobCreateView에서 회사가 채용공고를 등록할 수 있습니다.
+  
+  * ```GET /post/``` 에서 등록된 정보를 확인할 수 있고, 채용정보를 post할 수 있습니다.
+  * 회사는 채용을 등록한 뒤에 등록한 채용정보의 목록을 볼 수 있습니다.
+  ```
+  [
     {
-        "id": 1,
-        "position": "Junior Django Developer",
-        "compensation": 1000000,
-        "description": "Wanted Lab hires backend junior developers",
-        "skills": "python, django, docker"
+        "company": 2,
+        "country": "Korea",
+        "region": "Busan",
+        "position": "Senior frontend developer",
+        "compensation": 40000000,
+        "description": "bla bla bla",
+        "skills": "react, javascript"
     },
     {
-        "id": 2,
-        "position": "React Junior Developer",
-        "compensation": 2000000,
-        "description": "Wanted Lab hire frontend developers",
-        "skills": "javascript,react"
+        "company": 1,
+        "country": "Korea",
+        "region": "Seoul",
+        "position": "Senior backend developer",
+        "compensation": 20000000,
+        "description": "bla bla bla",
+        "skills": "python, django"
     }
 ]
 ```
+
+
+  ### 채용 수정,삭제 
+  
+  * ```GET /post/<int:id>/``` 와 같이 id를 기준으로 상세페이지에 접근할 수 있으며, 
+  * 상세페이지에서는 수정, 삭제를 할 수 있습니다. <br/>
+    ```PUT /post/<id>```에서 정보를 update할 수 있고,  ```Delete /post/<id>``` 에서 정보를 delete할 수 있습니다.<br/>
+  * 응답 <br/>
+    성공했을 시 HTTP 200 OK 으로 응답하며, 실패했을 시 HTTP 404 Not Found으로 응답합니다.
+    
+  * 상세 페이지에서 수정 삭제 했을 때, 회사는 아래와 같이 상세페이지에서 정보를 확인 할 수 있습니다.
+    
+```
+{
+    "company": 1,
+    "country": "Korea",
+    "region": "Seoul",
+    "position": "Django junior developer",
+    "compensation": 25000000,
+    "description": "bla bla",
+    "skills": "python, django"
+}
+```
 <hr/>
-JobOpen 앱에서는 채용목록을 조회하는 기능과 검색기능을 구현했습니다.
 
   ### 채용 목록 조회
   ``` GET /list/ ```<br/>
@@ -71,13 +91,14 @@ JobOpen 앱에서는 채용목록을 조회하는 기능과 검색기능을 구�
   ```
   
   ### 채용 상세페이지
+  ```GET /list/<int:id>```
   
-  사용자는 채용 상세페이지에서 채용 내용인 description 필드와 채용보상금인 compensation 필드의 정보를 추가적으로 볼 수 있습니다.  
+  * 사용자는 채용 상세페이지에서 채용 내용인 description 필드와 채용보상금인 compensation 필드의 정보를 추가적으로 볼 수 있습니다.  
   
-  목록을 정의한 Serializer와 상세페이지를 정의한 Serializer를 나누어 작성하여 구현하였습니다. 
+  * 목록을 정의한 JobOpenSerializer와 상세페이지를 정의한 JobOpenDetailSerializer를 나누어 작성하여 구현하였습니다. 
   ```
   {
-    "id": 1,
+    "id": 4,
     "company": "Wanted Lab",
     "country": "Korea",
     "region": "Seoul",
