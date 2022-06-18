@@ -7,8 +7,8 @@ from JobOpen.views import JobSearchList, JobDetailView, JobUpdateDeleteView, Job
 #
 #
 urlpatterns = [
-    path('list/', JobSearchList.as_view()),
-    path('list/<int:id>/',JobDetailView.as_view()),
+    path('', JobSearchList.as_view()),
+    path('<int:id>/',JobDetailView.as_view()),
     path('post/',JobCreateView.as_view()),
     path('post/<int:id>/',JobUpdateDeleteView.as_view()),
 
