@@ -27,7 +27,7 @@ class JobSearchList(generics.ListAPIView):
     queryset = JobOpen.objects.all()
     serializer_class = JobOpenSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['company','country','region','position','skills']
+    search_fields = ['company__company_name','country','region','position','skills']
 
 
 #
