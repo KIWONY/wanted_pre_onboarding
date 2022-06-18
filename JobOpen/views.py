@@ -2,7 +2,7 @@ from django.shortcuts import render
 #
 # # Create your views here.
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics, filters, viewsets, mixins
+from rest_framework import generics, filters, viewsets, mixins, status
 from rest_framework.generics import RetrieveAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 from rest_framework.response import Response
@@ -47,11 +47,9 @@ class JobCreateView(ListCreateAPIView):
 class JobUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     queryset = JobOpen.objects.all()
     serializer_class = JobCreateSerializer
+    lookup_field = "id"
 
-
-
-
-# 사용자가 상세목록 조회
+# User가 상세목록 조회
 class JobDetailView(RetrieveAPIView):
     queryset = JobOpen.objects.all()
     serializer_class = JobOpenDetailSerializer
