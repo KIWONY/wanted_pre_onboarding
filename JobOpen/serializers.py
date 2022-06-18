@@ -34,3 +34,12 @@ class JobCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return JobOpen.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.country = validated_data.get('country', instance.country)
+        instance.region = validated_data.get('region', instance.region)
+        instance.position = validated_data.get('position', instance.position)
+        instance.compensation = validated_data.get('compensation', instance.compensation)
+        instance.description = validated_data.get('description', instance.description)
+        instance.skills = validated_data.get('skills', instance.skills)
+        return instance
