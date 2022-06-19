@@ -12,17 +12,8 @@ from JobOpen.models import JobOpen
 
 from JobOpen.serializers import JobOpenSerializer, JobOpenDetailSerializer, JobCreateSerializer
 
-
-# class JobPostViewSet(viewsets.ModelViewSet):
-#     queryset = JobOpen.objects.all()
-#     serializer_class = JobOpenSerializer
-#
-#     def perform_create(self, serializer):
-#         serializer.save(user=self.request.user)
-#
 # # ---------------검색기능을 추가한 view ------------------
 # User가 접근할 수 있는 list
-# # https://www.django-rest-framework.org/api-guide/filtering/#searchfilter
 class JobSearchList(generics.ListAPIView):
     queryset = JobOpen.objects.all()
     serializer_class = JobOpenSerializer
@@ -30,9 +21,16 @@ class JobSearchList(generics.ListAPIView):
     search_fields = ['company__company_name','country','region','position','skills']
 
 
-#
-# https://www.django-rest-framework.org/api-guide/generic-views/#examples
-# 회사가 채용공고 생성, 조회
+
+# User가 상세목록 조회할 수 있는 view
+class JobDetailView(RetrieveAPIView):
+    queryset = JobOpen.objects.all()
+    serializer_class = JobOpenDetailSerializer
+    lookup_field = "id"
+
+
+
+# 회사가 채용공고 생성, 조회할 수 있는 view
 class JobCreateView(ListCreateAPIView):
     queryset = JobOpen.objects.all()
     serializer_class = JobCreateSerializer
@@ -43,17 +41,9 @@ class JobCreateView(ListCreateAPIView):
         return Response(serializer.data)
 
 
-
+# 회사가 채용공고 업데이트,삭제할 수 있는 view
 class JobUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     queryset = JobOpen.objects.all()
     serializer_class = JobCreateSerializer
     lookup_field = "id"
 
-# User가 상세목록 조회
-class JobDetailView(RetrieveAPIView):
-    queryset = JobOpen.objects.all()
-    serializer_class = JobOpenDetailSerializer
-    lookup_field = "id"
-
-
-# https://stackoverflow.com/questions/67700941/how-to-access-other-model-field-from-serializer-related-field

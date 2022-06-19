@@ -1,6 +1,5 @@
-from Company.models import Companys
-from JobOpen.models import JobOpen
 
+from JobOpen.models import JobOpen
 from rest_framework import serializers
 
 # 조회
@@ -12,7 +11,7 @@ class JobOpenSerializer(serializers.ModelSerializer):
         model = JobOpen
         fields = ['id','company','country','region','position','skills',]
 
-
+# 상세 페이지
 class JobOpenDetailSerializer(serializers.ModelSerializer):
     company = serializers.ReadOnlyField(source="company.company_name")
 
@@ -35,6 +34,7 @@ class JobCreateSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return JobOpen.objects.create(**validated_data)
 
+    # 업데이트할 때 company는 제외하고 업데이트 가능.
     def update(self, instance, validated_data):
         instance.country = validated_data.get('country', instance.country)
         instance.region = validated_data.get('region', instance.region)
